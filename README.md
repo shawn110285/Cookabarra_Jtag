@@ -2,38 +2,39 @@
 debug module was partially supported 
 
 
-1. ### ======== build the verilator simulator =========================
+## 1.build the verilator simulator 
 
-  `~~*~~shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC$ make all~~*~~`
+shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC$ make all
 
 and then start the simulator
 
-`shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC$ ./tb` 
+`shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC$ ./tb`  
+
 Built with Verilator 4.212 2021-09-01.
 Recommended: Verilator 4.0 or later.
 This emulator compiled with JTAG Remote Bitbang client. To enable, use +jtag_rbb_enable=1.
 Listening on port 9823
 Attempting to accept client socket
 Accepted successfully.
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-================ reset the system from boot_addr ===============
-reset the cpu,done 
-================ reset the system from boot_addr ===============
-invalid instruction opcode (00), pc=       128,  the instruction is (00000000)
-invalid instruction opcode (00), pc=       128,  the instruction is (00000000)
-dm write dmcontrol, data=0x00000000, dmcontrol =0x00000000
+================ reset the system from boot_addr ===============   
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+================ reset the system from boot_addr ===============  
+reset the cpu,done  
+================ reset the system from boot_addr ===============  
+invalid instruction opcode (00), pc=       128,  the instruction is (00000000)  
+invalid instruction opcode (00), pc=       128,  the instruction is (00000000)  
+dm write dmcontrol, data=0x00000000, dmcontrol =0x00000000  
 
 
 
 
-2. ### ====================== openocd ==============================
+## 2.openocd
 
   shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC/openocd$ openocd -f ./openocd_local_bitbang.cfg
   Open On-Chip Debugger 0.10.0+dev (SiFive OpenOCD 0.10.0-2020.04.6)
@@ -57,7 +58,7 @@ dm write dmcontrol, data=0x00000000, dmcontrol =0x00000000
 
 
 
-3. ### ============================= gdb =============================
+## 3. gdb
 
    shawnliu@shawnliu-Aspire-TC-780:/var/cpu_testbench/git_hub/Cookabarra_SOC/sw_app/bootrom/frondend$ riscv32-unknown-elf-gdb
    GNU gdb (GDB) 8.2.50.20181127-git
@@ -81,7 +82,7 @@ Type "apropos word" to search for commands related to "word".
 Timeout limit to wait for target to respond is 2.
 (gdb) set remotetimeout 20
 
-#### 3.1 ================================= connect to openocd (gdb server) ====================
+### 3.1 connect to openocd (gdb server)
 
 (gdb) target remote localhost:3333
 Remote debugging using localhost:3333
@@ -91,7 +92,7 @@ Ignoring packet error, continuing...
 0x80000036 in ?? ()
 
 
-#### 3.2 ================================= access gpr registers  ===============================
+### 3.2 access gpr registers
 
 (gdb) info reg
 ra             0x5f555555	0x5f555555
@@ -128,7 +129,7 @@ t6             0x0	0
 pc             0x80000036	0x80000036
 (gdb) 
 
-#### 3.3 ================================= access csr  ===============================
+### 3.3 access CSR
 
 (gdb) p $misa
 $1 = 1073746176
@@ -150,7 +151,7 @@ $8 = 128
 $9 = 1
 (gdb) 
 
-#### 3.4 ================================= access memory  ===============================
+### 3.4 access memory
 
 (gdb) x/wx 0x100000
 0x100000:	0x7e40006f
@@ -163,7 +164,7 @@ $9 = 1
 (gdb) x 0x80
 0x80:	0x003007b7
 
-#### 3.5 ================================= load file ======================================
+### 3.5 load file
 
 (gdb) target remote localhost:3333
 Remote debugging using localhost:3333
@@ -187,7 +188,7 @@ Start address 0x84, load size 3984
 Ignoring packet error, continuing...
 Transfer rate: 255 bytes/sec, 996 bytes/write.
 
-#### 3.5 ========================== jump to a address or a function=====================================
+### 3.5 jump to a address or a function
 
 jump function
 set $pc=address
